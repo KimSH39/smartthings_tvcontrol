@@ -128,6 +128,66 @@ const App = () => {
       })
   }
 
+  const handleChaUpClick = () => {
+    axios
+      .post(
+        `${baseUrl}${deviceId}/commands`,
+        {
+          commands: [
+            {
+              component: 'main',
+              capability: 'tvChannel',
+              command: 'channelDown',
+              arguments: [],
+              name: 'channelDown',
+            },
+          ],
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + accessToken,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
+  const handleChaDownClick = () => {
+    axios
+      .post(
+        `${baseUrl}${deviceId}/commands`,
+        {
+          commands: [
+            {
+              component: 'main',
+              capability: 'tvChannel',
+              command: 'channelUp',
+              arguments: [],
+              name: 'channelUp',
+            },
+          ],
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + accessToken,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
   return (
     <div className="App">
       <button className="element" onClick={() => handleOffClick()}>
@@ -141,6 +201,12 @@ const App = () => {
       </button>
       <button className="element" onClick={() => handleVolDownClick()}>
         VolDown
+      </button>
+      <button className="element" onClick={() => handleChaUpClick()}>
+        Channel Up
+      </button>
+      <button className="element" onClick={() => handleChaDownClick()}>
+        Channel Down
       </button>
     </div>
   )
